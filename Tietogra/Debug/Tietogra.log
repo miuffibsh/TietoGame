@@ -1,0 +1,3 @@
+﻿  Map.cpp
+e:\programowanie\tietogra\tietogra\tietogra\map.cpp(37): warning C4244: "inicjowanie": konwersja z "double" do "int", możliwa utrata danych
+  Tietogra.vcxproj -> E:\Programowanie\tietogra\Tietogra\Debug\Tietogra.exe
