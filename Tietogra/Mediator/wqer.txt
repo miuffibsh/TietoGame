@@ -1,0 +1,1 @@
+Create a function updateState that takes unitStats, statusFile, 

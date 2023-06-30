@@ -1,0 +1,2 @@
+Tryb zaawansowany (0), tryb podstawowy (1):
+0
