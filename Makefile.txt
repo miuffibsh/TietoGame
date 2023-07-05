@@ -1,0 +1,33 @@
+CC = g++
+CFLAGS = -std=c++17 -Wall
+INCLUDES = -I.
+
+# Tietogra program
+Tietogra: Tietogra/Main.o Tietogra/Map.o
+	$(CC) $(CFLAGS) $(INCLUDES) -o Tietogra/Tietogra Tietogra/Main.o Tietogra/Map.o
+
+Tietogra/Main.o: Tietogra/Main.cpp Tietogra/Map.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c Tietogra/Main.cpp -o Tietogra/Main.o
+
+Tietogra/Map.o: Tietogra/Map.cpp Tietogra/Map.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c Tietogra/Map.cpp -o Tietogra/Map.o
+
+# PlayerOne program
+PlayerOne: PlayerOne/Actors.o PlayerOne/Main.o PlayerOne/OrdersAndAI.o
+	$(CC) $(CFLAGS) $(INCLUDES) -o PlayerOne/PlayerOne PlayerOne/Actors.o PlayerOne/Main.o PlayerOne/OrdersAndAI.o
+
+PlayerOne/Actors.o: PlayerOne/Actors.cpp PlayerOne/Actors.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c PlayerOne/Actors.cpp -o PlayerOne/Actors.o
+
+PlayerOne/OrdersAndAI.o: PlayerOne/OrdersAndAI.cpp PlayerOne/OrdersAndAI.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c PlayerOne/OrdersAndAI.cpp -o PlayerOne/OrdersAndAI.o
+
+# Mediator program
+Mediator: Mediator/Mediator.o Mediator/Main.o
+	$(CC) $(CFLAGS) $(INCLUDES) -o Mediator/Mediator Mediator/Mediator.o Mediator/Main.o
+
+Mediator/Mediator.o: Mediator/Mediator.cpp Mediator/Mediator.h
+	$(CC) $(CFLAGS) $(INCLUDES) -c Mediator/Mediator.cpp -o Mediator/Mediator.o
+
+clean:
+	rm -f Tietogra/Tietogra PlayerOne/PlayerOne Mediator/Mediator */*.o
