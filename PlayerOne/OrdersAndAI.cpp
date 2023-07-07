@@ -1,11 +1,4 @@
 #include "OrdersAndAI.h"
-#include <fstream>
-#include <iostream>
-#include <ctime>
-#include <queue>
-#include <climits>
-#include <limits>
-#include <random>
 
 struct UnitBaseInfo {
 	int unitID;
@@ -567,20 +560,20 @@ void OrdersAndAI::actionUnits(std::vector<ActiveUnit>& activeUnits, std::vector<
 void OrdersAndAI::writeOrdersToFile() {
 	std::ofstream outputFile("rozkazy.txt");
 	if (!outputFile) {
-		std::cerr << "Failed to open rozkazy.txt file for writing." << std::endl;
+		std::cerr << "Failed to open rozkazy.txt file for writing." << "\n";
 		return;
 	}
 
 	// Write commands for each executed action
 	for (const auto& command : executedCommands) {
 		if (command.action == ActionType::Move) {
-			outputFile << command.unitID << " M " << command.finalCol << " " << command.finalRow << std::endl;
+			outputFile << command.unitID << " M " << command.finalCol << " " << command.finalRow << "\n";
 		}
 		else if (command.action == ActionType::Attack) {
-			outputFile << command.unitID << " A " << command.enemyID << std::endl;
+			outputFile << command.unitID << " A " << command.enemyID << "\n";
 		}
 		else if (command.action == ActionType::Produce) {
-			outputFile << command.baseID << " B " << command.unitType << std::endl;
+			outputFile << command.baseID << " B " << command.unitType << "\n";
 		}
 	}
 

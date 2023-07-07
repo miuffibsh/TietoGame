@@ -11,7 +11,7 @@ void playerWins(int turn, const std::vector<std::tuple<std::string, int, std::st
 
 	std::ofstream outputFile("rezultaty.txt", std::ofstream::trunc);
 	if (!outputFile.is_open()) {
-		std::cerr << "Failed to open rezultaty.txt for writing." << std::endl;
+		std::cerr << "Failed to open rezultaty.txt for writing.\n";
 		std::exit(1);  // Terminate the program with an error status code
 	}
 
@@ -23,12 +23,12 @@ void playerWins(int turn, const std::vector<std::tuple<std::string, int, std::st
 		for (char cell : row) {
 			outputFile << cell;
 		}
-		outputFile << std::endl;
+		outputFile << "\n";
 	}
 
 	// Write the contents of allOrders to the file
 	for (const auto& order : allOrders) {
-		outputFile << std::get<0>(order) << ' ' << std::get<1>(order) << ' ' << std::get<2>(order) << std::endl;
+		outputFile << std::get<0>(order) << ' ' << std::get<1>(order) << ' ' << std::get<2>(order) << "\n";
 	}
 
 	outputFile.close();
@@ -683,7 +683,7 @@ void buildUnits(std::vector<int>& productionTimer1, std::vector<int>& production
 		}
 	}
 	// Check if enough turns have passed to build the unit
-	std::cout << "Production timer Player: " << (productionTimer1[0] - turn) <<std::endl;
+	std::cout << "Production timer Player: " << (productionTimer1[0] - turn) <<"\n";
 	if ((productionTimer1[0] - turn) <= 0) {
 		productionTimer1[0] = 0;
 
@@ -751,7 +751,7 @@ void buildUnits(std::vector<int>& productionTimer1, std::vector<int>& production
 		}
 	}
 	// Check if enough turns have passed to build the unit
-	std::cout << "Production timer Enemy: " << (productionTimer2[0] - turn) << std::endl;
+	std::cout << "Production timer Enemy: " << (productionTimer2[0] - turn) << "\n";
 	if ((productionTimer2[0] - turn) <= 0) {
 		productionTimer2[0] = 0;
 		

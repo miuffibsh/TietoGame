@@ -3,6 +3,13 @@
 
 #include <vector>
 #include <utility>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <cstdlib>
+#include <ctime>
+#include <queue>
 
 class Map
 {

@@ -1,6 +1,3 @@
-#include <iostream>
-#include <fstream>
-#include <string>
 #include "Map.h"
 
 int main() {
@@ -26,7 +23,7 @@ int main() {
 		generator.printMap("mapa.txt");
 	}
 	else {
-		std::cout << "Failed to open mapa.txt for reading." << std::endl;
+		std::cout << "Failed to open mapa.txt for reading." << "\n";
 		std::cin.ignore();
 		return -1;
 	}

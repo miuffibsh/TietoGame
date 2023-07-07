@@ -1,10 +1,6 @@
 #ifndef ORDERSANDAI_H
 #define ORDERSANDAI_H
 
-#include <vector>
-#include <string>
-#include <cstdlib>
-#include <algorithm>
 #include "Actors.h"
 
 enum class ActionType {

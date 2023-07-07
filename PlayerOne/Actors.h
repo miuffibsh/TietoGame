@@ -5,6 +5,14 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <cstdlib>
+#include <algorithm>
+#include <ctime>
+#include <queue>
+#include <climits>
+#include <limits>
+#include <random>
 
 struct UnitStats {
 	char type;

@@ -46,7 +46,7 @@ int main() {
 	std::cin >> generateMapChoice;
 	std::system("clear");
 	if (generateMapChoice == 'y' || generateMapChoice == 'Y') {
-		system("Tietogra.exe");
+		system("./Tietogra");
 		std::cout << "The generated map was saved to the file mapa.txt\n";
 	}
 

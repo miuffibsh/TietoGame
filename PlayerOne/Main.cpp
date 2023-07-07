@@ -1,9 +1,3 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <sstream>
-#include "Actors.h"
 #include "OrdersAndAI.h"
 
 void readMapFromFile(const std::string& fileName, std::vector<std::vector<char>>& mapArray, int& rows, int& columns) {

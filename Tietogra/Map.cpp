@@ -1,10 +1,3 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <cstdlib>
-#include <ctime>
-#include <queue>
-#include <vector>
 #include "Map.h"
 
 Map::Map(int x, int y) {
@@ -116,7 +109,7 @@ void Map::printMap(const std::string& fileName) const {
 		for (int j = 0; j < columns; ++j) {
 			std::cout << array[i][j] << " ";
 		}
-		std::cout << std::endl;
+		std::cout << "\n";
 	}
 
 	// Open the original file for reading
@@ -130,19 +123,19 @@ void Map::printMap(const std::string& fileName) const {
 	std::string line;
 	int lineCount = 0;
 	while (std::getline(inputFile, line) && lineCount < 2) {
-		outputFile << line << std::endl;
+		outputFile << line << "\n";
 		lineCount++;
 	}
 
-	outputFile << std::endl;  // Add an empty line
-	outputFile << "Wygenerowana mapa:" <<std::endl;
+	outputFile << "\n";  // Add an empty line
+	outputFile << "Wygenerowana mapa:" <<"\n";
 
 	// Save the map to the new file
 	for (int i = 0; i < rows; ++i) {
 		for (int j = 0; j < columns; ++j) {
 			outputFile << array[i][j] << " ";
 		}
-		outputFile << std::endl;
+		outputFile << "\n";
 	}
 
 	// Close the files
@@ -241,7 +234,6 @@ bool Map::hasPath(int startRow, int startCol, int endRow, int endCol, char baseN
 
 // Check accessibility from base one to mines and base two
 bool Map::canReachMinesAndEnemyBase(int rows, int columns, char** array, int rowCoordinate, int colCoordinate, char myBase, char enemyBase) {
-	bool canReachMinesAndBaseTwo = true;
 	for (int row = 0; row < rows; ++row) {
 		for (int col = 0; col < columns; ++col) {
 			if (array[row][col] == myBase || array[row][col] == '6') {
