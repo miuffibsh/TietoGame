@@ -41,16 +41,7 @@ int main() {
 	std::string programNameE;
 	double timeLimitE;
 
-	std::cout << "Welcome to Tietogra. Do you want to generate a map? [y/n]\n";
-	char generateMapChoice;
-	std::cin >> generateMapChoice;
-	std::system("clear");
-	if (generateMapChoice == 'y' || generateMapChoice == 'Y') {
-		system("./Tietogra");
-		std::cout << "The generated map was saved to the file mapa.txt\n";
-	}
-
-	std::cout << "After the game, the result, map and orders will be saved to the file rezultaty.txt.\n";
+	std::cout << "Welcome to Tietogra!\nAfter the game, the result, map and orders will be saved to the file rezultaty.txt.\n";
 	std::cout << "Format: ./<name of the player program> mapa.txt status.txt rozkazy.txt [time limit in seconds]\n";
 	std::cout << "Input for the player: ";
 	std::cin >> programName >> mapFile >> statusFile >> ordersFile >> timeLimit;
@@ -75,11 +66,21 @@ int main() {
 	programName = programName.substr(2);
 	programNameE = programNameE.substr(2);
 
+	std::cout << "Do you want to generate a map? [y/n]\n";
+	char generateMapChoice;
+	std::cin >> generateMapChoice;
+	std::system("clear");
+	if (generateMapChoice == 'y' || generateMapChoice == 'Y') {
+		std::string command = "./Tietogra " + mapFile;
+		std::system(command.c_str());
+		std::cout << "The generated map was saved to the map file.\n";
+	}
+
 	// Loading mapa.txt
 	std::vector<std::vector<char>> map = loadMap(mapFile);
 
 	Mediator mediator;
-	mediator.startGame(programName, programNameE, 2000, timeLimit, timeLimitE, map, statusFile, ordersFile);
+	mediator.startGame(programName, programNameE, 2000, timeLimit, timeLimitE, map, statusFile, ordersFile, mapFile);
 
 	std::cin.ignore();
 	std::cin.get();

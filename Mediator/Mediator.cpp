@@ -33,8 +33,8 @@ void playerWins(int turn, const std::vector<std::tuple<std::string, int, std::st
 
 	outputFile.close();
 
-	std::cin.ignore();  // Ignore any characters entered by the user
-	std::cin.get();     // Wait for the user to press Enter
+	//std::cin.ignore();  // Ignore any characters entered by the user
+	//std::cin.get();     // Wait for the user to press Enter
 
 	std::exit(0);  // Terminate the program with a success status code
 }
@@ -877,7 +877,7 @@ Mediator::Mediator() {
 
 void Mediator::startGame(const std::string& programName, const std::string& programNameE, int maxGameTurns,
 	double maxTimeLimit, double maxTimeLimitE, std::vector<std::vector<char>> map, const std::string& statusFile,
-	const std::string& ordersFile) {
+	const std::string& ordersFile, const std::string& mapFile) {
 	long gold = 2000;
 	long goldE = 2000;
 	std::vector<int> productionTimer1(3, 0); // Three integers initialized to 0
@@ -947,7 +947,8 @@ void Mediator::startGame(const std::string& programName, const std::string& prog
 			// Start timer
 			std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
 
-			std::system(programName.c_str());
+			std::string command = "./" + programName + " " + mapFile + " " + statusFile + " " + ordersFile;
+			std::system(command.c_str());
 
 			// Stop timer and calculate elapsed time
 			std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
@@ -999,7 +1000,8 @@ void Mediator::startGame(const std::string& programName, const std::string& prog
 			// Start timer
 			std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
 
-			std::system(programNameE.c_str());
+			std::string command = "./" + programNameE + " " + mapFile + " " + statusFile + " " + ordersFile;
+			std::system(command.c_str());
 
 			// Stop timer and calculate elapsed time
 			std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();

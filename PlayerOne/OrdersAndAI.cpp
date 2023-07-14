@@ -557,10 +557,10 @@ void OrdersAndAI::actionUnits(std::vector<ActiveUnit>& activeUnits, std::vector<
 	}
 };
 
-void OrdersAndAI::writeOrdersToFile() {
-	std::ofstream outputFile("rozkazy.txt");
+void OrdersAndAI::writeOrdersToFile(const std::string& ordersFile) {
+	std::ofstream outputFile(ordersFile);
 	if (!outputFile) {
-		std::cerr << "Failed to open rozkazy.txt file for writing." << "\n";
+		std::cerr << "Failed to open " << ordersFile << " file for writing.\n";
 		return;
 	}
 
@@ -579,4 +579,5 @@ void OrdersAndAI::writeOrdersToFile() {
 
 	outputFile.close();
 }
+
 

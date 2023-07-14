@@ -30,7 +30,7 @@ public:
 	Mediator();
 	void startGame(const std::string& programName, const std::string& programNameE, 
 		int maxGameTurns, double maxTimeLimit, double maxTimeLimitE, std::vector<std::vector<char>> map,
-		const std::string& statusFile, const std::string& ordersFile);
+		const std::string& statusFile, const std::string& ordersFile, const std::string& mapFile);
 
 private:
 	std::vector<PlayerProgram> players;

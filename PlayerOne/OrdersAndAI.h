@@ -29,7 +29,7 @@ public:
 	void orderBase(std::vector<ActiveUnit>& activeUnits, long& gold, int baseID, const std::vector<UnitStats>& unitStats);
 	void actionUnits(std::vector<ActiveUnit>& activeUnits, std::vector<std::vector<char>>& mapArray,
 	const std::vector<UnitStats>& unitStats, const std::vector<Base>& bases, const std::vector<char>& damageType, const std::vector<std::vector<int>>& damageValue);
-	void writeOrdersToFile();
+	void writeOrdersToFile(const std::string& ordersFile);
 };
 
 #endif

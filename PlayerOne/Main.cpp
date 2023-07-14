@@ -113,10 +113,45 @@ void readStatusFromFile(const std::string& fileName, long& gold, std::vector<Bas
     }
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+	std::string mapFile, statusFile, ordersFile;
+
+	// Check if command-line arguments for map file, status file, and orders file are provided
+	if (argc > 3) {
+		mapFile = argv[1];
+		statusFile = argv[2];
+		ordersFile = argv[3];
+	}
+	else {
+		// If no command-line arguments are provided, check if default files exist
+		if (std::ifstream("mapa.txt")) {
+			mapFile = "mapa.txt";
+		}
+		else {
+			std::cout << "No map file specified. Please provide a valid map file.\n";
+			return -1;
+		}
+
+		if (std::ifstream("status.txt")) {
+			statusFile = "status.txt";
+		}
+		else {
+			std::cout << "No status file specified. Please provide a valid status file.\n";
+			return -1;
+		}
+
+		if (std::ifstream("rozkazy.txt")) {
+			ordersFile = "rozkazy.txt";
+		}
+		else {
+			std::cout << "No orders file specified. Please provide a valid orders file.\n";
+			return -1;
+		}
+	}
+
 	std::vector<std::vector<char>> mapArray;
 	int rows = 0, columns = 0;
-	readMapFromFile("mapa.txt", mapArray, rows, columns);
+	readMapFromFile(mapFile, mapArray, rows, columns);
 
 	Actors actors;
 	OrdersAndAI orders;
@@ -126,11 +161,12 @@ int main() {
 	std::vector<ActiveUnit> activeUnits;
 	char playerBaseID;
 
-	readStatusFromFile("status.txt", gold, bases, activeUnits, playerBaseID);
+	readStatusFromFile(statusFile, gold, bases, activeUnits, playerBaseID);
 
 	orders.orderBase(activeUnits, gold, playerBaseID, actors.getUnitStats());
 	orders.actionUnits(activeUnits, mapArray, actors.getUnitStats(), bases, actors.getDamageType(), actors.getDamageValue());
-	orders.writeOrdersToFile();
+	orders.writeOrdersToFile(ordersFile);
 
 	return 0;
 }
+
