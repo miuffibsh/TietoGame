@@ -947,7 +947,7 @@ void Mediator::startGame(const std::string& programName, const std::string& prog
 			// Start timer
 			std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
 
-			std::string command = "./" + programName + " " + mapFile + " " + statusFile + " " + ordersFile;
+			std::string command = programName + " " + mapFile + " " + statusFile + " " + ordersFile;
 			std::system(command.c_str());
 
 			// Stop timer and calculate elapsed time
@@ -1000,7 +1000,7 @@ void Mediator::startGame(const std::string& programName, const std::string& prog
 			// Start timer
 			std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
 
-			std::string command = "./" + programNameE + " " + mapFile + " " + statusFile + " " + ordersFile;
+			std::string command = programNameE + " " + mapFile + " " + statusFile + " " + ordersFile;
 			std::system(command.c_str());
 
 			// Stop timer and calculate elapsed time

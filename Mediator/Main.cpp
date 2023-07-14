@@ -50,37 +50,20 @@ int main(int argc, char* argv[]) {
 	}
 	else {
 		std::cout << "Welcome to Tietogra!\nAfter the game, the result, map and orders will be saved to the file rezultaty.txt.\n";
-		std::cout << "Format: ./<name of the player program> mapa.txt status.txt rozkazy.txt [time limit in seconds]\n";
+		std::cout << "Format: <name of the player program> mapa.txt status.txt rozkazy.txt [time limit in seconds]\n";
 		std::cout << "Input for the player: ";
 		std::cin >> programName >> mapFile >> statusFile >> ordersFile >> timeLimit;
-
-		// Validate if the input starts with "./"
-		if (programName.substr(0, 2) != "./") {
-			std::cout << "Invalid program name. Program name should start with './'\n";
-			return 1;
-		}
+		std::cout << "Format: <name of the player program> [time limit in seconds]\n";
+		std::cout << "Input for the enemy: ";
+		std::cin >> programNameE >> timeLimitE;
 	}
-
-	std::cout << "Format: ./<name of the player program> [time limit in seconds]\n";
-	std::cout << "Input for the enemy: ";
-	std::cin >> programNameE >> timeLimitE;
-
-	// Validate if the input starts with "./"
-	if (programNameE.substr(0, 2) != "./") {
-		std::cout << "Invalid program name. Program name should start with './'\n";
-		return 1;
-	}
-
-	// Remove the "./" from the program name
-	programName = programName.substr(2);
-	programNameE = programNameE.substr(2);
 
 	std::cout << "Do you want to generate a map? [y/n]\n";
 	char generateMapChoice;
 	std::cin >> generateMapChoice;
 	std::system("clear");
 	if (generateMapChoice == 'y' || generateMapChoice == 'Y') {
-		std::string command = "./Tietogra " + mapFile;
+		std::string command = "Tietogra " + mapFile;
 		std::system(command.c_str());
 		std::cout << "The generated map was saved to the map file.\n";
 	}
