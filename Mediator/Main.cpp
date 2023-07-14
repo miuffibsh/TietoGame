@@ -32,7 +32,7 @@ std::vector<std::vector<char>> loadMap(const std::string& mapFile)
 	return map;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
 	std::string programName;
 	std::string mapFile;
 	std::string statusFile;
@@ -41,15 +41,24 @@ int main() {
 	std::string programNameE;
 	double timeLimitE;
 
-	std::cout << "Welcome to Tietogra!\nAfter the game, the result, map and orders will be saved to the file rezultaty.txt.\n";
-	std::cout << "Format: ./<name of the player program> mapa.txt status.txt rozkazy.txt [time limit in seconds]\n";
-	std::cout << "Input for the player: ";
-	std::cin >> programName >> mapFile >> statusFile >> ordersFile >> timeLimit;
+	if (argc == 6) {
+		programName = argv[1];
+		mapFile = argv[2];
+		statusFile = argv[3];
+		ordersFile = argv[4];
+		timeLimit = std::stod(argv[5]);
+	}
+	else {
+		std::cout << "Welcome to Tietogra!\nAfter the game, the result, map and orders will be saved to the file rezultaty.txt.\n";
+		std::cout << "Format: ./<name of the player program> mapa.txt status.txt rozkazy.txt [time limit in seconds]\n";
+		std::cout << "Input for the player: ";
+		std::cin >> programName >> mapFile >> statusFile >> ordersFile >> timeLimit;
 
-	// Validate if the input starts with "./"
-	if (programName.substr(0, 2) != "./") {
-		std::cout << "Invalid program name. Program name should start with './'\n";
-		return 1;
+		// Validate if the input starts with "./"
+		if (programName.substr(0, 2) != "./") {
+			std::cout << "Invalid program name. Program name should start with './'\n";
+			return 1;
+		}
 	}
 
 	std::cout << "Format: ./<name of the player program> [time limit in seconds]\n";
