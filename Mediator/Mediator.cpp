@@ -1,6 +1,7 @@
 #include "Mediator.h"
 
-void playerWins(int turn, const std::vector<std::tuple<std::string, int, std::string>>& allOrders, const std::vector<std::vector<char>>& map) {
+void playerWins(int turn, const std::vector<std::tuple<std::string, int, std::string>>& allOrders, const std::vector<std::vector<char>>& map,
+	const std::vector<std::tuple<char, int, int, int, int, int>>& unitStats) {
 	std::string playerName;
 	if (turn % 2 == 1) {
 		playerName = "Player";
@@ -27,8 +28,53 @@ void playerWins(int turn, const std::vector<std::tuple<std::string, int, std::st
 	}
 
 	// Write the contents of allOrders to the file
+	int initialTurn = -1; // Initialize initialTurn for the Player with a default value
+	int initialTurnE = -1; // Initialize initialTurnE for the Enemy with a default value
+	int turnsToBuild = -1; // Initialize turnsToBuild for the Player with a default value
+	int turnsToBuildE = -1; // Initialize turnsToBuildE for the Enemy with a default value
+
 	for (const auto& order : allOrders) {
-		outputFile << std::get<0>(order) << ' ' << std::get<1>(order) << ' ' << std::get<2>(order) << "\n";
+		const std::string& orderString = std::get<0>(order);
+		char type = orderString[2]; // Get the character at index 1 to check for 'B'
+		char typeUnit = orderString[4]; // Get the character at index 2 to check the unit type
+
+		if (type == 'B') {
+			if (std::get<2>(order) == "Player" && initialTurn == -1) {
+				initialTurn = std::get<1>(order); // Assign the value to initialTurn
+				// Search for the specific unit type in the unitStats vector
+				for (const auto& unit : unitStats) {
+					if (std::get<0>(unit) == typeUnit) {
+						turnsToBuild = std::get<5>(unit); // Get the sixth element of the tuple
+						break; // Break the loop as we found the required unit type
+					}
+				}
+				outputFile << orderString << ' ' << std::get<1>(order) << ' ' << std::get<2>(order) << '\n';
+			}
+			else if (std::get<2>(order) == "Enemy" && initialTurnE == -1) {
+				initialTurnE = std::get<1>(order); // Assign the value to initialTurnE
+				// Search for the specific unit type in the unitStats vector
+				for (const auto& unit : unitStats) {
+					if (std::get<0>(unit) == typeUnit) {
+						turnsToBuildE = std::get<5>(unit); // Get the sixth element of the tuple
+						break; // Break the loop as we found the required unit type
+					}
+				}
+				outputFile << orderString << ' ' << std::get<1>(order) << ' ' << std::get<2>(order) << '\n';
+			}
+
+			//std::cout << (initialTurn + turnsToBuild - std::get<1>(order)) << std::endl;
+
+			if (std::get<2>(order) == "Player" && initialTurn != -1 && (initialTurn + turnsToBuild - std::get<1>(order) <= 2)) {
+				initialTurn = -1;
+			}
+			else if (std::get<2>(order) == "Enemy" && initialTurnE != -1 && (initialTurnE + turnsToBuildE - std::get<1>(order) <= 2)) {
+				initialTurnE = -1;
+			}
+		}
+		else {
+			// Write other orders directly to the output file
+			outputFile << orderString << ' ' << std::get<1>(order) << ' ' << std::get<2>(order) << '\n';
+		}
 	}
 
 	outputFile.close();
@@ -464,7 +510,7 @@ void updateState(const std::vector<std::tuple<char, int, int, int, int, int>>& u
 					// Check if the enemy base is destroyed (unit with type == 'B')
 					if (enemyUnitIter->type == 'B' && enemyUnitIter->enduranceLeft <= 0) {
 						// Run the function indicating that the player wins
-						playerWins(turn, allOrders, map);
+						playerWins(turn, allOrders, map, unitStats);
 						return;
 					}
 
